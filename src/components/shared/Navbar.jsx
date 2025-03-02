@@ -9,10 +9,11 @@ const navLinks = [
 
 const Navbar = () => {
   const [navBg, setNavBg] = useState("bg-[#15151580]");
+
   return (
     <nav>
       <div className="lg:w-[95%] mx-auto px-6">
-        <div className="p-4 flex items-center justify-center">
+        <div className="p-4 flex items-center justify-between">
           {/* logo */}
           <div>
             <h1 className="text-2xl inline-flex gap-3 items-center font-bold">
@@ -49,6 +50,24 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                 ))}
+
+                {/* based on users */}
+                <NavLink
+                  className={({ isActive }) =>
+                    `font-bold ${
+                      isActive
+                        ? "text-secondary"
+                        : `${
+                            navBg.includes("bg-transparent")
+                              ? "text-white"
+                              : "text-black dark:text-white"
+                          }`
+                    } hover:text-secondary duration-300`
+                  }
+                  to={"/login"}
+                >
+                  Login
+                </NavLink>
               </ul>
             </div>
           </div>
