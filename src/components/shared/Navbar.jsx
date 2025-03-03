@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { createTheme } from "@mui/material";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { name: "Home", route: "/" },
@@ -7,8 +8,49 @@ const navLinks = [
   { name: "Classes", route: "/classes" },
 ];
 
+const materialTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff0000",
+    },
+    primary: {
+      main: "#00ff00",
+    },
+  },
+});
+
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHome, setIsHome] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isFixed, setIsFixed] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [navBg, setNavBg] = useState("bg-[#15151580]");
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const darkClass = "dark";
+    const root = window.document.documentElement;
+    if (isDarkMode) {
+      root.classList.add(darkClass);
+    } else {
+      root.classList.remove(darkClass);
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    setIsHome(location.pathname === "/");
+    setIsLogin(location.pathname === "/login");
+    setIsFixed(
+      location.pathname === "register" || location.pathname === "/login"
+    );
+  }, [location]);
 
   return (
     <nav>
