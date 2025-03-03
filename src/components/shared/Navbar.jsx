@@ -52,22 +52,27 @@ const Navbar = () => {
                 ))}
 
                 {/* based on users */}
-                <NavLink
-                  className={({ isActive }) =>
-                    `font-bold ${
-                      isActive
-                        ? "text-secondary"
-                        : `${
-                            navBg.includes("bg-transparent")
-                              ? "text-white"
-                              : "text-black dark:text-white"
-                          }`
-                    } hover:text-secondary duration-300`
-                  }
-                  to={"/login"}
-                >
-                  Login
-                </NavLink>
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `font-bold ${
+                        isActive
+                          ? "text-secondary"
+                          : `${
+                              navBg.includes("bg-transparent")
+                                ? "text-white"
+                                : "text-black dark:text-white"
+                            }`
+                      } hover:text-secondary duration-300`
+                    }
+                    to={"/login"}
+                  >
+                    Login
+                  </NavLink>
+                </li>
+
+                {/* color toggle */}
+                <li>Light / Dark</li>
               </ul>
             </div>
           </div>
