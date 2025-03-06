@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, Switch, ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Classes", route: "/classes" },
 ];
 
-const materialTheme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#ff0000",
@@ -51,6 +51,28 @@ const Navbar = () => {
       location.pathname === "register" || location.pathname === "/login"
     );
   }, [location]);
+
+  useEffect(()=>{
+    const handleScroll = () => {
+      const currentPosition = window.pageYOffset;
+      setScrollPosition(currentPosition);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
+
+  useEffect(()=>{
+    if(scrollPosition > 100) {
+      if(isHome){
+        setNavBg("bg-white backdrop-filter backdrop-blur-xl bg-opacity-0 dark:text-white text-black")
+      }
+      else{
+        setNavBg("bg-white dark:bg-black dark:text-white text-black")
+      }
+    } else{
+      setNavBg(`${isHome || location.pathname === "/" ? "bg-transparent" : "bg-white dark:bg-black"} dark:text-white text-black`)
+    }
+  }, [scrollPosition])
 
   return (
     <nav>
@@ -114,7 +136,14 @@ const Navbar = () => {
                 </li>
 
                 {/* color toggle */}
-                <li>Light / Dark</li>
+                <li>
+                  <ThemeProvider theme={theme}>
+                    <div className="flex flex-col justify-center items-center">
+                      <Switch onChange={()=>{setIsDarkMode(!isDarkMode)}}/>
+                        <h1 className="text-[8px]">Light/Dark</h1>
+                    </div>
+                  </ThemeProvider>
+                </li>
               </ul>
             </div>
           </div>
