@@ -1,10 +1,15 @@
-import HeroContainer from "./Hero/HeroContainer"
-
+import Gallery from "./Gallery/Gallery";
+import HeroContainer from "./Hero/HeroContainer";
 
 const Home = () => {
   return (
-    <HeroContainer/>
-  )
-}
+    <section>
+      <HeroContainer />
+      <div className="max-w-screen-xl mx-auto">
+        <Gallery />
+      </div>
+    </section>
+  );
+};
 
-export default Home
+export default Home;
