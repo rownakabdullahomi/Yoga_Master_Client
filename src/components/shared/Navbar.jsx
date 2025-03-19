@@ -108,9 +108,9 @@ const Navbar = () => {
             onClick={() => navigate("/")}
             className="flex-shrink-0 cursor-pointer pl-7 md:p-0 flex items-center"
           >
-            <div>
+            <div className={`${isHome ? "text-white" : ""}`}>
               <h1 className="text-2xl inline-flex gap-3 items-center font-bold">
-                YogaMaster{" "}
+                YogaMaster
                 <img src="./yoga-logo.png" alt="" className="w-8 h-8" />
               </h1>
               <p className="font-bold text-[13px] tracking-[8px]">
